@@ -184,3 +184,30 @@ a { text-decoration: none; color: inherit; }
   .nav { padding: .5rem 1.2rem; }
   .nav-links { display: none; }
 }
+
+/* ── MOBILE RESPONSIVE FIXES ── */
+@media (max-width: 768px) {
+
+  /* Prevent horizontal scroll completely */
+  html, body { overflow-x: hidden; max-width: 100vw; }
+
+  /* Nav */
+  .nav { padding: .5rem 1.2rem; height: 70px; }
+  .nav-logo img { height: 52px; }
+  .nav-links { display: none; }
+
+  /* WA float — smaller on mobile */
+  .wa-float {
+    width: 44px !important; height: 44px !important;
+    bottom: 1.2rem !important; right: 1.2rem !important;
+  }
+  .wa-float svg { width: 20px !important; height: 20px !important; }
+
+  /* Product card grid */
+  .products-grid-mobile {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Section padding */
+  .section-header { padding: 2.5rem 1.5rem 1.5rem; }
+}
