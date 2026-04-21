@@ -4,11 +4,22 @@ import { getProducto, salas, camas } from '../data';
 
 const WA_NUMBER = '57TUNUMEROWSP';
 
+function useIsMobile() {
+  const [mobile, setMobile] = useState(window.innerWidth <= 768);
+  useEffect(() => {
+    const h = () => setMobile(window.innerWidth <= 768);
+    window.addEventListener('resize', h);
+    return () => window.removeEventListener('resize', h);
+  }, []);
+  return mobile;
+}
+
 export default function Producto() {
   const { id } = useParams();
   const navigate = useNavigate();
   const producto = getProducto(id);
   const [imgActiva, setImgActiva] = useState(0);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -16,7 +27,7 @@ export default function Producto() {
   }, [id]);
 
   if (!producto) return (
-    <div style={{ paddingTop:'var(--nav-h)', textAlign:'center', padding:'10rem 2rem' }}>
+    <div style={{ paddingTop: isMobile ? '70px' : 'var(--nav-h)', textAlign:'center', padding:'10rem 2rem', overflowX:'hidden', maxWidth:'100vw' }}>
       <h2 style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'2rem' }}>Producto no encontrado</h2>
       <br/>
       <Link to="/" className="btn-primary" style={{ display:'inline-flex', marginTop:'1rem' }}>← Volver al inicio</Link>
@@ -30,26 +41,37 @@ export default function Producto() {
   const coleccionLabel = esCama ? 'Camas & Alcobas' : 'Salas & Sofás';
 
   return (
-    <div style={{ paddingTop:'var(--nav-h)' }}>
+    <div style={{ paddingTop: isMobile ? '70px' : 'var(--nav-h)', overflowX:'hidden', maxWidth:'100vw' }}>
 
       {/* BREADCRUMB */}
-      <div style={{ padding:'1.2rem 3rem', borderBottom:'1px solid var(--warm)', display:'flex', gap:'.6rem', alignItems:'center', fontSize:'.75rem', color:'var(--clay)' }}>
-        <Link to="/" style={{ color:'var(--clay)' }}>Inicio</Link>
+      <div style={{ padding: isMobile ? '0.8rem 1.5rem' : '1.2rem 3rem', borderBottom:'1px solid var(--warm)', display:'flex', gap:'.6rem', alignItems:'center', fontSize:'.75rem', color:'var(--clay)', flexWrap:'wrap', overflowX:'auto' }}>
+        <Link to="/" style={{ color:'var(--clay)', whiteSpace:'nowrap' }}>Inicio</Link>
         <span>›</span>
-        <Link to={coleccionPath} style={{ color:'var(--clay)' }}>{coleccionLabel}</Link>
+        <Link to={coleccionPath} style={{ color:'var(--clay)', whiteSpace:'nowrap' }}>{coleccionLabel}</Link>
         <span>›</span>
-        <span style={{ color:'var(--charcoal)', fontWeight:500 }}>{producto.nombre}</span>
+        <span style={{ color:'var(--charcoal)', fontWeight:500, whiteSpace:'nowrap' }}>{producto.nombre}</span>
       </div>
 
       {/* DETALLE PRINCIPAL */}
-      <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'5rem', padding:'4rem 5rem', alignItems:'start' }}>
+      <div style={{
+        display:'grid',
+        gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr',
+        gap: isMobile ? '1.5rem' : '5rem',
+        padding: isMobile ? '2rem 1.5rem' : '4rem 5rem',
+        alignItems: isMobile ? 'start' : 'start',
+        maxWidth:'100vw',
+        overflowX:'hidden'
+      }}>
 
         {/* GALERÍA IZQUIERDA */}
         <div>
           {/* IMAGEN PRINCIPAL */}
-          <div style={{ position:'relative', overflow:'hidden', borderRadius:3, marginBottom:'1rem', aspectRatio:'4/3', background:'var(--warm)' }}>
+          <div style={{
+            position:'relative', overflow:'hidden', borderRadius:3, marginBottom:'1rem',
+            aspectRatio:'4/3', background:'var(--warm)', width:'100%'
+          }}>
             {producto.tag && (
-              <span style={{ position:'absolute', top:'1rem', left:'1rem', background:'var(--blue)', color:'var(--white)', fontSize:'.65rem', fontWeight:600, letterSpacing:'.1em', textTransform:'uppercase', padding:'.3rem .8rem', borderRadius:2, zIndex:1 }}>
+              <span style={{ position:'absolute', top:'1rem', left:'1rem', background:'var(--blue)', color:'white', fontSize:'.65rem', fontWeight:600, letterSpacing:'.1em', textTransform:'uppercase', padding:'.3rem .8rem', borderRadius:2, zIndex:1 }}>
                 {producto.tag}
               </span>
             )}
@@ -59,8 +81,9 @@ export default function Producto() {
               style={{ width:'100%', height:'100%', objectFit:'cover', transition:'opacity .3s' }}
             />
           </div>
+
           {/* THUMBNAILS */}
-          <div style={{ display:'flex', gap:'.8rem' }}>
+          <div style={{ display:'flex', gap:'.8rem', width:'100%' }}>
             {producto.imagenes.map((img, i) => (
               <div
                 key={i}
@@ -78,22 +101,26 @@ export default function Producto() {
         </div>
 
         {/* INFO DERECHA */}
-        <div style={{ position:'sticky', top:'calc(var(--nav-h) + 2rem)' }}>
+        <div style={{ position: isMobile ? 'relative' : 'sticky', top: isMobile ? 'auto' : 'calc(var(--nav-h) + 2rem)', width:'100%' }}>
           <div style={{ fontSize:'.72rem', fontWeight:600, letterSpacing:'.18em', textTransform:'uppercase', color:'var(--clay)', marginBottom:'1rem' }}>
             {coleccionLabel}
           </div>
 
-          <h1 style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'clamp(2rem,3.5vw,3rem)', fontWeight:300, lineHeight:1.1, marginBottom:'1.5rem' }}>
+          <h1 style={{ fontFamily:"'Cormorant Garamond',serif", fontSize: isMobile ? '2rem' : 'clamp(2rem,3.5vw,3rem)', fontWeight:300, lineHeight:1.1, marginBottom:'1.5rem' }}>
             {producto.nombre}
           </h1>
 
           {/* PRECIO Y ENTREGA */}
-          <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:'1.5rem', padding:'1.5rem', background:'var(--warm)', borderRadius:3 }}>
+          <div style={{
+            display:'flex', alignItems: isMobile ? 'flex-start' : 'center', justifyContent:'space-between',
+            marginBottom:'1.5rem', padding:'1.5rem', background:'var(--warm)', borderRadius:3,
+            flexDirection: isMobile ? 'column' : 'row', gap: isMobile ? '1rem' : '0'
+          }}>
             <div>
               <div style={{ fontSize:'.72rem', fontWeight:600, letterSpacing:'.1em', textTransform:'uppercase', color:'var(--clay)', marginBottom:'.2rem' }}>Precio</div>
-              <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'2.2rem', fontWeight:400 }}>{fmt(producto.precio)}</div>
+              <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'2rem', fontWeight:400 }}>{fmt(producto.precio)}</div>
             </div>
-            <div style={{ textAlign:'right' }}>
+            <div style={{ textAlign: isMobile ? 'left' : 'right' }}>
               <div style={{ fontSize:'.72rem', fontWeight:600, letterSpacing:'.1em', textTransform:'uppercase', color:'var(--clay)', marginBottom:'.2rem' }}>Entrega</div>
               <div style={{ fontSize:'.9rem', fontWeight:500 }}>{producto.entrega}</div>
             </div>
@@ -112,7 +139,7 @@ export default function Producto() {
             <ul style={{ listStyle:'none', display:'flex', flexDirection:'column', gap:'.6rem' }}>
               {producto.detalles.map((d, i) => (
                 <li key={i} style={{ display:'flex', alignItems:'center', gap:'.8rem', fontSize:'.85rem', fontWeight:300, color:'#5A5047' }}>
-                  <span style={{ width:6, height:6, borderRadius:'50%', background:'var(--blue)', flexShrink:0, display:'inline-block' }}></span>
+                  <span style={{ width:6, height:6, borderRadius:'50%', background:'var(--blue)', flexShrink:0 }}></span>
                   {d}
                 </li>
               ))}
@@ -142,8 +169,8 @@ export default function Producto() {
           </div>
 
           {/* GARANTÍA */}
-          <div style={{ marginTop:'1.5rem', padding:'1rem 1.2rem', border:'1px solid var(--warm)', borderRadius:2, display:'flex', gap:'.8rem', alignItems:'center' }}>
-            <span style={{ fontSize:'1.2rem' }}>🛡️</span>
+          <div style={{ marginTop:'1.5rem', padding:'1rem 1.2rem', border:'1px solid var(--warm)', borderRadius:2, display:'flex', gap:'.8rem', alignItems:'flex-start' }}>
+            <span style={{ fontSize:'1.2rem', flexShrink:0 }}>🛡️</span>
             <span style={{ fontSize:'.78rem', fontWeight:300, color:'var(--clay)' }}>
               Garantía 1 año en estructura · Fabricación artesanal colombiana · Entrega e instalación incluida
             </span>
@@ -152,20 +179,20 @@ export default function Producto() {
       </div>
 
       {/* PRODUCTOS RELACIONADOS */}
-      <section style={{ padding:'4rem 3rem 6rem', background:'var(--warm)' }}>
-        <div style={{ textAlign:'center', marginBottom:'2.5rem' }}>
+      <section style={{ padding: isMobile ? '2rem 1.5rem 3rem' : '4rem 3rem 6rem', background:'var(--warm)', overflowX:'hidden', maxWidth:'100vw' }}>
+        <div style={{ textAlign:'center', marginBottom:'2rem' }}>
           <div style={{ display:'inline-flex', alignItems:'center', gap:'.8rem', fontSize:'.72rem', fontWeight:600, letterSpacing:'.18em', textTransform:'uppercase', color:'var(--clay)', marginBottom:'.8rem' }}>
             También te puede gustar
           </div>
-          <h2 style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'2.2rem', fontWeight:300 }}>
+          <h2 style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'2rem', fontWeight:300 }}>
             Otros <em style={{ fontStyle:'italic', color:'var(--blue-dark)' }}>productos</em>
           </h2>
         </div>
-        <div style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:'2rem' }}>
+        <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(3,1fr)', gap:'1.5rem' }}>
           {relacionados.map(p => {
             const fmt2 = (n) => '$' + n.toLocaleString('es-CO');
             return (
-              <div key={p.id} className="product-card" onClick={() => navigate(`/producto/${p.id}`)}>
+              <div key={p.id} className="product-card" onClick={() => navigate(`/producto/${p.id}`)} style={{ cursor:'pointer' }}>
                 <div className="product-img-wrap">
                   <img src={p.imagenes[0]} alt={p.nombre} loading="lazy" />
                   {p.tag && <span className="product-badge">{p.tag}</span>}
