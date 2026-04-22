@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { salas, camas } from '../data';
 import ProductCard from '../components/ProductCard';
 
-const WA_NUMBER = '57TUNUMEROWSP';
+const WA_NUMBER = '573246189514';
 const MARQUEE = ['Fabricantes Directos','Diseño Colombiano','A Tu Medida','Entrega en Medellín','Sin Intermediarios','Telas Premium'];
 
 function useIsMobile() {
@@ -67,7 +67,7 @@ export default function Home() {
               Ver catálogo
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </Link>
-            <a href={`https://wa.me/${WA_NUMBER}?text=Hola!%20Quiero%20cotizar`} target="_blank" rel="noreferrer" className="btn-secondary">
+            <a href={`https://wa.me/${WA_NUMBER}?text=Hola%20quiero%20cotizar%20un%20mueble`} target="_blank" rel="noreferrer" className="btn-secondary">
               Cotizar ahora
             </a>
           </div>
@@ -213,7 +213,7 @@ export default function Home() {
           {[
             ['María Camila R.','Envigado','Quedé enamorada de mi sala. La calidad es increíble y el precio mucho mejor que en cualquier almacén.'],
             ['Andrés Felipe M.','Medellín','Pedí la cama King a medida. La entregaron perfecta, en el tiempo prometido y la instalación fue impecable.'],
-            ['Valentina S.','Bello','El esquinero es exactamente lo que soñé. Elegí la tela, el color y las medidas. ¡Súper recomendados!'],
+            ['Valentina S.','Bello','El esquinero es exactamente lo que soñé. Elegí la tela, el color y las medidas. Súper recomendados!'],
           ].map(([name,city,text]) => (
             <div key={name} style={{ background:'white', padding:'2rem', borderRadius:3, borderBottom:'3px solid var(--blue)' }}>
               <div style={{ color:'var(--blue)', marginBottom:'1rem', letterSpacing:2 }}>★★★★★</div>
@@ -235,7 +235,7 @@ export default function Home() {
             Escríbenos y recibe tu cotización en menos de 30 minutos.
           </p>
         </div>
-        <a href={`https://wa.me/${WA_NUMBER}?text=Hola!%20Quiero%20cotizar%20un%20mueble`} target="_blank" rel="noreferrer" className="btn-wa">
+        <a href={`https://wa.me/${WA_NUMBER}?text=Hola%20quiero%20cotizar%20un%20mueble`} target="_blank" rel="noreferrer" className="btn-wa">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.136.561 4.14 1.535 5.875L0 24l6.272-1.516A11.949 11.949 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.896 0-3.671-.5-5.21-1.373l-.374-.222-3.724.9.936-3.613-.244-.387A9.938 9.938 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
           Cotizar por WhatsApp
         </a>
