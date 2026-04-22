@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { getProducto, salas, camas } from '../data';
 
-const WA_NUMBER = '57TUNUMEROWSP';
+const WA_NUMBER = '573246189514';
 
 function useIsMobile() {
   const [mobile, setMobile] = useState(window.innerWidth <= 768);

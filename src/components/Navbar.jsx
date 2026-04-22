@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 
-const WA_NUMBER = '57TUNUMEROWSP';
+const WA_NUMBER = '573246189514';
 
 export default function Navbar() {
   const { pathname } = useLocation();

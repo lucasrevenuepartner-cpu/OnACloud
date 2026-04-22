@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
-const WA_NUMBER = '57TUNUMEROWSP';
+const WA_NUMBER = '573246189514';
 
 export default function ProductCard({ producto }) {
   const navigate = useNavigate();
