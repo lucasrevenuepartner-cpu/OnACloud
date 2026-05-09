@@ -90,20 +90,27 @@ export const salas = [
     ]
   },
   {
-    id: "sofa-damasco",
-    nombre: "Sofá Damasco",
+    id: "sofa-comodin",
+    nombre: "Sofá Comodín",
     categoria: "sofa",
-    precio: 2400000,
-    descripcion: "Un clásico atemporal. El Sofá Damasco en tela homónima es elegante, duradero y versátil — perfecto para salas formales o espacios que buscan carácter.",
-    detalles: ["Tela damasco importada", "3 puestos estándar", "Estructura en madera maciza", "Patas torneadas", "Colores clásicos disponibles"],
-    entrega: "~12 días hábiles",
-    tag: null,
+    precio: 4369900,
+    descripcion: "Sofá Comodín: Versatilidad y Confort en Módulos",
+    detalles: [
+      "Estructura modular con 4 puffs extraíbles",
+      "Fabricado sobre medida y por pedido",
+      "Brazos redondeados ergonómicos",
+      "Patas en madera natural corta",
+      "Tela y color a tu elección"
+    ],
+    entrega: "~15 días hábiles",
+    tag: "🔄 Modular",
     imagenes: [
-      "https://images.unsplash.com/photo-1549497538-303791108851?w=900&q=80",
-      "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=900&q=80",
-      "https://images.unsplash.com/photo-1484101403633-562f891dc89a?w=900&q=80",
+      "https://via.placeholder.com/900x600?text=Sofa+Comodin+Blanco",
+      "https://via.placeholder.com/900x600?text=Sofa+Comodin+Ambiente+1",
+      "https://via.placeholder.com/900x600?text=Sofa+Comodin+Ambiente+2",
+      "https://via.placeholder.com/900x600?text=Sofa+Comodin+Ambiente+3"
     ]
-  },
+},
   {
     id: "sofa-carrito-90",
     nombre: "Sofá Carrito 90",
